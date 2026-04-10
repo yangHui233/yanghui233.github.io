@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>杨会 - 高级前端开发工程师</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --color-primary: #3d4f5f;
+    --color-primary-light: #f4f6f7;
+    --color-text: #1c2526;
+    --color-text-secondary: #4b5e6a;
+    --color-text-muted: #6b818c;
+    --color-border: #dfe4e7;
+    --color-bg: #ffffff;
+    --color-tag-bg: #edf1f3;
+  }
+
+  html { font-size: 14px; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    color: var(--color-text);
+    background: #f0f2f5;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 20px auto;
+    background: var(--color-bg);
+    padding: 32px 36px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+
+  /* ── Header ── */
+  .header { margin-bottom: 20px; }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+  }
+
+  .header-name {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: 2px;
+  }
+
+  .header-target {
+    font-size: 15px;
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .header-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    padding-top: 8px;
+    border-top: 2px solid var(--color-primary);
+  }
+
+  .header-meta span::before {
+    display: inline-block;
+    margin-right: 4px;
+    color: var(--color-text-muted);
+  }
+
+  .header-summary {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+  }
+
+  .header-summary p + p {
+    margin-top: 2px;
+  }
+
+  /* ── Section ── */
+  .section { margin-bottom: 18px; }
+
+  .section-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-primary);
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+    border-bottom: 1.5px solid var(--color-primary);
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .section-title .icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  /* ── Skills ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px 0;
+  }
+
+  .skill-row {
+    display: flex;
+    font-size: 13px;
+    line-height: 1.9;
+  }
+
+  .skill-label {
+    flex-shrink: 0;
+    font-weight: 600;
+    color: var(--color-text);
+    min-width: 80px;
+  }
+
+  .skill-label::after { content: "："; }
+
+  .skill-value { color: var(--color-text-secondary); }
+
+  /* ── Work Experience ── */
+  .work-item { margin-bottom: 12px; }
+  .work-item:last-child { margin-bottom: 0; }
+
+  .work-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2px;
+  }
+
+  .work-company {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .work-role {
+    font-size: 13px;
+    color: var(--color-primary);
+    font-weight: 500;
+  }
+
+  .work-period {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+  }
+
+  .work-desc {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .work-desc li {
+    position: relative;
+    padding-left: 14px;
+    line-height: 1.8;
+  }
+
+  .work-desc li::before {
+    content: "·";
+    position: absolute;
+    left: 2px;
+    color: var(--color-text-muted);
+    font-weight: 700;
+  }
+
+  /* ── Projects ── */
+  .project { margin-bottom: 14px; }
+  .project:last-child { margin-bottom: 0; }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 3px;
+  }
+
+  .project-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .project-period {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+  }
+
+  .project-intro {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin-bottom: 4px;
+  }
+
+  .project-sub {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 5px 0 2px;
+  }
+
+  .project-list {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .project-list li {
+    position: relative;
+    padding-left: 14px;
+    line-height: 1.75;
+  }
+
+  .project-list li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-size: 11px;
+    top: 1px;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
+  }
+
+  .tag {
+    font-size: 11px;
+    padding: 1px 8px;
+    background: var(--color-tag-bg);
+    color: var(--color-text-muted);
+    border-radius: 3px;
+    font-weight: 500;
+  }
+
+  .results-list {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .results-list li {
+    position: relative;
+    padding-left: 14px;
+    line-height: 1.75;
+  }
+
+  .results-list li::before {
+    content: "★";
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-size: 9px;
+    top: 3px;
+  }
+
+  .highlight { color: var(--color-primary); font-weight: 600; }
+
+  /* ── Education ── */
+  .edu-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+  }
+
+  .edu-school { font-weight: 600; color: var(--color-text); }
+
+  /* ── Print ── */
+  @media print {
+    html { font-size: 13px; }
+    body { background: none; }
+    .page {
+      width: 100%;
+      margin: 0;
+      padding: 24px 28px;
+      box-shadow: none;
+      min-height: auto;
+    }
+    .section { margin-bottom: 14px; }
+    .project { margin-bottom: 10px; }
+    .work-item { margin-bottom: 8px; }
+  }
+
+  @page {
+    size: A4;
+    margin: 10mm 8mm;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ════════ Header ════════ -->
+  <div class="header">
+    <div class="header-top">
+      <span class="header-name">杨 会</span>
+      <span class="header-target">求职意向：高级前端开发工程师</span>
+    </div>
+    <div class="header-meta">
+      <span>8年+前端开发经验</span>
+      <span>本科 · 1994.11</span>
+      <span>15910269957</span>
+      <span>yanghui2333@gmail.com</span>
+    </div>
+    <div class="header-summary">
+      <p>擅长前端基础设施与平台化建设，覆盖 SDK 体系、工程化构建、性能优化及跨端落地。</p>
+      <p>负责过多业务线公共能力沉淀与技术方案推进，能够在复杂业务场景中平衡复用性、稳定性与交付效率。</p>
+      <p>具备较强的跨领域协作与问题推进能力，可借助 AI 工具快速完成方案验证与原型落地。</p>
+    </div>
+  </div>
+
+  <!-- ════════ 专业技能 ════════ -->
+  <div class="section">
+    <div class="section-title">专业技能</div>
+    <div class="skills-grid">
+      <div class="skill-row"><span class="skill-label">前端技术</span><span class="skill-value">React（精通）、Next.js、TypeScript、JavaScript</span></div>
+      <div class="skill-row"><span class="skill-label">工程化构建</span><span class="skill-value">Webpack、Rollup、CI/CD（Jenkins）、多业务线构建体系</span></div>
+      <div class="skill-row"><span class="skill-label">架构设计</span><span class="skill-value">SDK 体系设计、模块化架构、组件库建设</span></div>
+      <div class="skill-row"><span class="skill-label">跨端与客户端</span><span class="skill-value">微信小程序、Hybrid App、鸿蒙应用（ArkTS / ArkUI）、JSBridge、H5 容器通信</span></div>
+      <div class="skill-row"><span class="skill-label">数据与链路</span><span class="skill-value">神策埋点、火山数据、性能监控、线上问题定位、WebSocket；了解 SIP 协议及实时语音交互基本链路</span></div>
+      <div class="skill-row"><span class="skill-label">AI 辅助开发</span><span class="skill-value">Copilot、Cursor、ChatGPT（用于方案设计、原型验证、代码生成、测试辅助）</span></div>
+    </div>
+  </div>
+
+  <!-- ════════ 工作经历 ════════ -->
+  <div class="section">
+    <div class="section-title">工作经历</div>
+
+    <div class="work-item">
+      <div class="work-header">
+        <div>
+          <span class="work-company">梦想科技</span>
+          <span class="work-role"> · 高级前端开发工程师</span>
+        </div>
+        <span class="work-period">2019.05 — 至今</span>
+      </div>
+      <ul class="work-desc">
+        <li>主导公司前端 SDK 体系从 0 到 1 建设，稳定支撑 10+ 线上项目</li>
+        <li>负责 React 项目的工程化架构设计与性能优化，搭建多业务线构建体系，支持多主题 / 多业务线动态构建</li>
+        <li>主导 AI 智能外呼系统方案设计与原型验证，并完成公司首款鸿蒙混合 App 落地与上架支持</li>
+      </ul>
+    </div>
+
+    <div class="work-item">
+      <div class="work-header">
+        <div>
+          <span class="work-company">小猪先生科技有限公司</span>
+          <span class="work-role"> · 前端开发工程师</span>
+        </div>
+        <span class="work-period">2018.07 — 2019.05</span>
+      </div>
+      <ul class="work-desc">
+        <li>负责公司移动端项目开发，参与微信小程序开发与维护</li>
+      </ul>
+    </div>
+
+    <div class="work-item">
+      <div class="work-header">
+        <div>
+          <span class="work-company">宜聚（北京）网络科技有限公司</span>
+          <span class="work-role"> · 前端开发工程师</span>
+        </div>
+        <span class="work-period">2017.05 — 2018.07</span>
+      </div>
+      <ul class="work-desc">
+        <li>负责混合 APP（Hybrid App）H5 侧业务开发，基于 WebView 容器实现核心业务页面，与原生端通过 JSBridge 完成交互对接</li>
+        <li>参与 PC 端管理后台开发及运营活动页面搭建，使用 React 完成功能模块的迭代与维护</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════ 项目经历 ════════ -->
+  <div class="section">
+    <div class="section-title">项目经历</div>
+
+    <!-- 项目1: AI智能外呼 -->
+    <div class="project">
+      <div class="project-header">
+        <span class="project-name">AI 智能外呼系统 — 方案设计与原型验证</span>
+        <span class="project-period">2025 — 2026</span>
+      </div>
+      <div class="project-intro">
+        作为前端负责人主导项目方案设计，围绕"自动外呼 → 语音识别 → 对话决策 → 语音合成"搭建实时语音交互闭环；借助 AI 工具完成 Python 服务层、SIP 对接与 RAG 流程原型验证，项目当前处于 PoC / Demo 阶段，尚未正式投入生产环境。
+      </div>
+      <div class="project-sub">核心工作</div>
+      <ul class="project-list">
+        <li><b>整体方案设计</b>：主导技术选型、模块拆分与组件化架构设计，明确 SIP 通信、ASR/TTS、RAG 对话、任务调度等模块职责与接口边界；借助 AI 工具完成 Python 服务层与 pjsua2 的关键流程验证，打通外呼任务派发、通话控制与语音处理主链路</li>
+        <li><b>对话链路验证</b>：用户语音经 ASR 转文字后，由大语言模型进行意图识别与话术库检索，结合检索结果生成回复；针对意图识别不确定场景设计兜底话术与状态流转，验证 RAG 对话方案可行性</li>
+        <li><b>实时流式优化</b>：集成 VAD 语音活动检测避免无效计算；通过 ASR 流式识别 + TTS 流式合成 + 高频话术缓存等逐步优化交互时延，在测试环境下将端到端对话延迟从初版 3s+ 降至 <span class="highlight">1.2s 以内</span></li>
+
+      </ul>
+      <div class="project-sub">核心成果</div>
+      <ul class="results-list">
+        <li>以前端背景完成跨领域项目的方案拆解、关键链路验证与 Demo 落地，体现复杂系统规划与推进能力</li>
+      </ul>
+      <div class="project-tags">
+        <span class="tag">FreeSWITCH</span>
+        <span class="tag">SIP</span>
+        <span class="tag">WebSocket</span>
+        <span class="tag">ASR/TTS</span>
+        <span class="tag">RAG</span>
+        <span class="tag">LLM</span>
+        <span class="tag">VAD</span>
+        <span class="tag">Python</span>
+        <span class="tag">Cursor</span>
+      </div>
+    </div>
+
+    <!-- 项目2: SDK体系 -->
+    <div class="project">
+      <div class="project-header">
+        <span class="project-name">前端 SDK 体系设计与落地</span>
+        <span class="project-period">2022 — 至今</span>
+      </div>
+      <div class="project-intro">
+        主导公司前端 SDK 体系从 0 到 1 建设，覆盖大数据采集 SDK、客户端交互 SDK 等核心能力，支撑多条业务线快速接入。
+      </div>
+      <div class="project-sub">核心工作</div>
+      <ul class="project-list">
+        <li><b>架构设计与组件沉淀</b>：设计模块化 SDK 体系，各 SDK 职责独立、按需引入；在此基础上沉淀全局弹窗调度管理器（单例模式 + 优先级队列，支持多弹窗批量注入、按优先级依次释放）、请求层、埋点上报、JSBridge 通信、环境判断等通用能力，统一各项目基础设施，减少重复开发</li>
+        <li><b>构建与发布</b>：基于 Rollup 搭建多规格构建流程，支持 UMD / ESM / CJS 多种输出格式</li>
+        <li><b>持续维护</b>：建立版本管理与变更日志机制，持续跟进线上问题并优化性能</li>
+      </ul>
+      <div class="project-sub">核心成果</div>
+      <ul class="results-list">
+        <li>SDK 稳定支撑 <span class="highlight">10+ 线上项目</span>，覆盖公司主要核心业务线</li>
+        <li>新项目接入成本降低约 <span class="highlight">30%</span>，实现"一次接入，多端复用"</li>
+        <li>线上严重异常率保持较低水平，未发生影响核心业务的重大线上事故</li>
+      </ul>
+      <div class="project-tags">
+        <span class="tag">TypeScript</span>
+        <span class="tag">Webpack</span>
+        <span class="tag">Rollup</span>
+        <span class="tag">SDK 架构</span>
+        <span class="tag">模块化设计</span>
+      </div>
+    </div>
+
+    <!-- 项目3: 工程化体系 -->
+    <div class="project">
+      <div class="project-header">
+        <span class="project-name">项目工程化体系建设</span>
+        <span class="project-period">2022 — 2024</span>
+      </div>
+      <div class="project-intro">
+        为解决多业务线相似功能重复开发问题，基于 React 搭建平台化项目架构，支持多主题、多场景灵活配置，显著提升团队研发效率。
+      </div>
+      <div class="project-sub">核心工作</div>
+      <ul class="project-list">
+        <li><b>多业务线构建体系</b>：基于 Webpack 深度定制构建配置，通过模块化设计支持多主题 / 多业务线动态构建，一套代码产出多条业务线产物，明显缩短新业务接入周期</li>
+        <li><b>首屏性能优化</b>：通过资源整合、懒加载、预加载等策略，在内部测试中将首屏加载时间从 2.5s 优化至 <span class="highlight">1.2s 以内</span>；利用 Webpack 插件实现 Loading 动画提前展示，明显减少白屏等待时间</li>
+        <li><b>长列表性能优化</b>：针对后台管理模块中万级数据列表的渲染卡顿问题，引入 react-window 实现虚拟滚动，仅渲染可视区域及缓冲区 DOM 节点，显著降低列表渲染开销，滚动流畅度明显提升</li>
+        <li><b>CI/CD 与监控</b>：协助运维团队搭建基于 Jenkins 的前端自动化部署流水线，配置多环境构建参数及部署策略；接入神策 / 火山数据平台，建立线上监控预警机制，明显提升部署效率并减少重复操作</li>
+      </ul>
+      <div class="project-tags">
+        <span class="tag">React</span>
+        <span class="tag">Webpack</span>
+        <span class="tag">性能优化</span>
+        <span class="tag">react-window</span>
+        <span class="tag">虚拟列表</span>
+        <span class="tag">Jenkins</span>
+        <span class="tag">CI/CD</span>
+        <span class="tag">神策数据</span>
+        <span class="tag">平台化架构</span>
+      </div>
+    </div>
+
+    <!-- 项目4: 官网SSR -->
+    <div class="project">
+      <div class="project-header">
+        <span class="project-name">公司官网混合渲染架构建设</span>
+        <span class="project-period">2023 — 2024</span>
+      </div>
+      <div class="project-intro">
+        基于 Next.js App Router 搭建公司官网（品牌展示、博客资讯等模块），采用 React Server Components、Streaming SSR 与 SSG / ISR 组合方案，实现服务端优先渲染与渐进式加载，提升 SEO 收录能力与首屏用户体验。
+      </div>
+      <div class="project-sub">核心工作</div>
+      <ul class="project-list">
+        <li><b>渲染架构设计</b>：以 Server Components 作为默认渲染层，静态页面通过 generateStaticParams + ISR 实现增量静态生成，减少客户端 JS 下发并提升页面加载性能。</li>
+        <li><b>流式渲染优化（Streaming SSR）</b>：基于 Suspense + loading.tsx 实现流式渲染，优先返回页面 Shell，数据区块按需分块注入，配合 Skeleton 占位优化感知体验，有效降低白屏时间并提升首屏可见速度。</li>
+        <li><b>SEO 与元信息管理</b>：使用 generateMetadata 统一管理 Meta 信息，结合结构化数据（JSON-LD）与 Sitemap 自动生成，提升搜索引擎抓取效率与页面收录能力。</li>
+        <li><b>性能优化</b>：利用 Next.js Image 实现图片懒加载与自适应尺寸优化，结合 dynamic import 实现组件级按需加载，核心页面 LCP 在良好网络环境下稳定在 ~1.5s–2s 区间（基于 Lighthouse 测试）。</li>
+      </ul>
+      <div class="project-tags">
+        <span class="tag">Next.js</span>
+        <span class="tag">App Router</span>
+        <span class="tag">RSC</span>
+        <span class="tag">Streaming SSR</span>
+        <span class="tag">SSG</span>
+        <span class="tag">ISR</span>
+        <span class="tag">SEO</span>
+        <span class="tag">React</span>
+      </div>
+    </div>
+
+    <!-- 项目5: 小程序 -->
+    <div class="project">
+      <div class="project-header">
+        <span class="project-name">微信小程序开发与自动化部署</span>
+        <span class="project-period">2019 — 2021</span>
+      </div>
+      <div class="project-intro">
+        负责多个微信小程序的开发与维护，搭建自动化批量部署工具链，显著提升多端发版效率。
+      </div>
+      <div class="project-sub">核心工作</div>
+      <ul class="project-list">
+        <li><b>自动化批量部署</b>：基于 miniprogram-ci 搭建自动化上传工具，支持多个小程序批量构建与上传；针对队列上传的状态污染问题，采用 child_process.fork 做进程隔离，显著提升多小程序发版效率</li>
+      </ul>
+      <div class="project-tags">
+        <span class="tag">微信小程序</span>
+        <span class="tag">miniprogram-ci</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">自动化部署</span>
+        <span class="tag">多进程</span>
+      </div>
+    </div>
+
+    <!-- 项目6: 鸿蒙APP -->
+    <div class="project">
+      <div class="project-header">
+        <span class="project-name">鸿蒙原生 APP 开发</span>
+        <span class="project-period">2024 — 2025</span>
+      </div>
+      <div class="project-intro">
+        公司首款鸿蒙应用，主动学习鸿蒙技术栈（ArkTS / ArkUI），完成混合 App 方案落地与上架支持。应用主体业务页面基于 H5 承载，原生层主要负责 OCR 识别、活体检测、登录等系统能力集成，最终顺利上线。
+      </div>
+      <div class="project-sub">核心工作</div>
+      <ul class="project-list">
+        <li><b>原生能力集成</b>：基于鸿蒙原生 API 完成 OCR 证件识别、活体检测登录等系统能力对接，并封装为统一调用接口供 H5 页面使用</li>
+        <li><b>H5 容器与通信</b>：搭建原生与 H5 的通信桥梁（JSBridge），封装网络请求库及通用工具类，保障 H5 业务页面在鸿蒙端稳定运行</li>
+        <li><b>项目落地与上架支持</b>：完成项目搭建、联调测试与上架支持等工作，体现快速掌握新技术并推动混合 App 落地的能力</li>
+      </ul>
+      <div class="project-tags">
+        <span class="tag">ArkTS</span>
+        <span class="tag">ArkUI</span>
+        <span class="tag">H5</span>
+        <span class="tag">JSBridge</span>
+        <span class="tag">OCR</span>
+        <span class="tag">活体检测</span>
+        <span class="tag">鸿蒙</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ════════ 教育背景 ════════ -->
+  <div class="section">
+    <div class="section-title">教育背景</div>
+    <div class="edu-row">
+      <div>
+        <span class="edu-school">淮阴师范学院</span>
+        <span style="color:var(--color-text-secondary)"> · 地理信息技术 · 本科</span>
+      </div>
+      <span style="color:var(--color-text-muted); font-size:12px;">2013.09 — 2017.06</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
