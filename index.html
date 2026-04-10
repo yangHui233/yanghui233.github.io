@@ -36,6 +36,8 @@
     background: var(--color-bg);
     padding: 32px 36px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
   }
 
   /* ── Header ── */
@@ -88,6 +90,14 @@
     margin-top: 2px;
   }
 
+  .header,
+  .work-item,
+  .project,
+  .edu-row {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
   .header-target,
   .header-meta span,
   .skill-value,
@@ -114,6 +124,8 @@
     display: flex;
     align-items: center;
     gap: 6px;
+    break-after: avoid-page;
+    page-break-after: avoid;
   }
 
   .section-title .icon {
@@ -155,6 +167,8 @@
     justify-content: space-between;
     align-items: baseline;
     margin-bottom: 2px;
+    break-after: avoid-page;
+    page-break-after: avoid;
   }
 
   .work-company {
@@ -205,6 +219,8 @@
     justify-content: space-between;
     align-items: baseline;
     margin-bottom: 3px;
+    break-after: avoid-page;
+    page-break-after: avoid;
   }
 
   .project-name {
@@ -237,6 +253,8 @@
     color: var(--color-text-secondary);
     padding-left: 0;
     list-style: none;
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 
   .project-list li {
@@ -275,6 +293,8 @@
     color: var(--color-text-secondary);
     padding-left: 0;
     list-style: none;
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 
   .results-list li {
@@ -309,16 +329,30 @@
     html { font-size: 13px; }
 
     body {
-      background: #e9edf1;
+      background:
+        linear-gradient(180deg, #eef2f5 0%, #e5eaef 100%);
     }
 
     .page {
       width: calc(100vw - 24px);
       min-height: auto;
       margin: 12px auto;
-      padding: 22px 18px;
-      border-radius: 16px;
-      box-shadow: 0 10px 28px rgba(28, 37, 38, 0.08);
+      padding: 22px 16px 18px;
+      border-radius: 18px;
+      box-shadow: 0 14px 36px rgba(28, 37, 38, 0.09);
+    }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 84px;
+      background: linear-gradient(135deg, rgba(61, 79, 95, 0.14), rgba(61, 79, 95, 0));
+      pointer-events: none;
+    }
+
+    .page > * {
+      position: relative;
     }
 
     .header {
@@ -344,22 +378,31 @@
     }
 
     .header-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 8px 12px;
       border-top-width: 1px;
+      align-items: start;
     }
 
     .section {
       margin-bottom: 16px;
+      padding: 12px 12px 10px;
+      border: 1px solid rgba(61, 79, 95, 0.09);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: 0 6px 18px rgba(28, 37, 38, 0.04);
     }
 
     .section-title {
       margin-bottom: 8px;
       padding-bottom: 5px;
+      letter-spacing: 0.5px;
     }
 
     .skill-row {
       flex-direction: column;
-      gap: 2px;
+      gap: 1px;
       line-height: 1.7;
     }
 
@@ -376,6 +419,22 @@
       margin-bottom: 16px;
     }
 
+    .work-item:last-child,
+    .project:last-child {
+      margin-bottom: 0;
+    }
+
+    .work-desc li,
+    .project-list li,
+    .results-list li {
+      line-height: 1.7;
+    }
+
+    .project-intro,
+    .header-summary {
+      line-height: 1.72;
+    }
+
     .project-tags {
       gap: 6px;
       margin-top: 6px;
@@ -390,7 +449,7 @@
     .page {
       width: calc(100vw - 16px);
       margin: 8px auto;
-      padding: 18px 14px;
+      padding: 18px 12px 14px;
       border-radius: 12px;
     }
 
@@ -399,36 +458,139 @@
     }
 
     .header-meta {
-      flex-direction: column;
-      align-items: flex-start;
+      grid-template-columns: 1fr;
       gap: 4px;
+    }
+
+    .section {
+      padding: 11px 10px 9px;
+      border-radius: 12px;
     }
 
     .work-period,
     .project-period {
       font-size: 11px;
     }
+
+    .project-tags {
+      gap: 5px;
+    }
+
+    .tag {
+      font-size: 10.5px;
+      padding: 2px 7px;
+    }
   }
 
   /* ── Print ── */
   @media print {
-    html { font-size: 13px; }
+    html, body {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    html { font-size: 12.2px; }
     body { background: none; }
     .page {
       width: 100%;
       margin: 0;
-      padding: 24px 28px;
+      padding: 15px 18px;
       box-shadow: none;
       min-height: auto;
+      overflow: visible;
     }
-    .section { margin-bottom: 14px; }
-    .project { margin-bottom: 10px; }
-    .work-item { margin-bottom: 8px; }
+
+    .page::before {
+      display: none;
+    }
+
+    .header { margin-bottom: 14px; }
+    .header-summary {
+      margin-top: 8px;
+    }
+    .header-summary,
+    .skill-row,
+    .work-desc li,
+    .project-intro,
+    .project-list li {
+      line-height: 1.6;
+      orphans: 3;
+      widows: 3;
+    }
+    .section {
+      margin-bottom: 9px;
+      break-inside: auto;
+      page-break-inside: auto;
+    }
+    .section-title {
+      margin-bottom: 6px;
+      padding-bottom: 4px;
+    }
+    .skills-grid {
+      gap: 1px 0;
+    }
+    .skill-row {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 0;
+    }
+    .skill-label {
+      min-width: 80px;
+      flex-shrink: 0;
+    }
+    .skill-label::after {
+      content: "：";
+    }
+    .header-meta {
+      gap: 4px 16px;
+      padding-top: 6px;
+    }
+    .work-item,
+    .edu-row,
+    .project-tags {
+      break-inside: avoid-page;
+      page-break-inside: avoid;
+    }
+    .project,
+    .project-list,
+    .results-list {
+      break-inside: auto;
+      page-break-inside: auto;
+    }
+    .project { margin-bottom: 7px; }
+    .work-item { margin-bottom: 5px; }
+    .project-intro {
+      margin-bottom: 2px;
+    }
+    .project-sub {
+      margin: 4px 0 1px;
+      break-after: avoid-page;
+      page-break-after: avoid;
+    }
+    .results-list li::before,
+    .project-list li::before {
+      top: 2px;
+    }
+    .project-list li,
+    .results-list li {
+      break-inside: avoid-page;
+      page-break-inside: avoid;
+    }
+    .project-tags {
+      gap: 3px;
+      margin-top: 3px;
+    }
+    .tag {
+      font-size: 10px;
+      padding: 0 6px;
+      border: 0.5px solid rgba(107, 129, 140, 0.22);
+    }
   }
 
   @page {
     size: A4;
-    margin: 10mm 8mm;
+    margin: 7mm 6mm;
   }
 </style>
 </head>
@@ -458,11 +620,11 @@
   <div class="section">
     <div class="section-title">专业技能</div>
     <div class="skills-grid">
-      <div class="skill-row"><span class="skill-label">前端技术</span><span class="skill-value">React（精通）、Next.js、TypeScript、JavaScript</span></div>
+      <div class="skill-row"><span class="skill-label">前端技术</span><span class="skill-value">React、Next.js、TypeScript、JavaScript</span></div>
       <div class="skill-row"><span class="skill-label">工程化构建</span><span class="skill-value">Webpack、Rollup、CI/CD（Jenkins）、多业务线构建体系</span></div>
       <div class="skill-row"><span class="skill-label">架构设计</span><span class="skill-value">SDK 体系设计、模块化架构、组件库建设</span></div>
-      <div class="skill-row"><span class="skill-label">跨端与客户端</span><span class="skill-value">微信小程序、Hybrid App、鸿蒙应用（ArkTS / ArkUI）、JSBridge、H5 容器通信</span></div>
-      <div class="skill-row"><span class="skill-label">数据与链路</span><span class="skill-value">神策埋点、火山数据、性能监控、线上问题定位、WebSocket；了解 SIP 协议及实时语音交互基本链路</span></div>
+      <div class="skill-row"><span class="skill-label">跨端与客户端</span><span class="skill-value">微信小程序、Hybrid App、鸿蒙应用、JSBridge</span></div>
+      <div class="skill-row"><span class="skill-label">数据与链路</span><span class="skill-value">神策埋点、火山数据、性能监控、线上问题定位、WebSocket</span></div>
       <div class="skill-row"><span class="skill-label">AI 辅助开发</span><span class="skill-value">Copilot、Cursor、ChatGPT（用于方案设计、原型验证、代码生成、测试辅助）</span></div>
     </div>
   </div>
@@ -532,7 +694,6 @@
         <li><b>整体方案设计</b>：主导技术选型、模块拆分与组件化架构设计，明确 SIP 通信、ASR/TTS、RAG 对话、任务调度等模块职责与接口边界；借助 AI 工具完成 Python 服务层与 pjsua2 的关键流程验证，打通外呼任务派发、通话控制与语音处理主链路</li>
         <li><b>对话链路验证</b>：用户语音经 ASR 转文字后，由大语言模型进行意图识别与话术库检索，结合检索结果生成回复；针对意图识别不确定场景设计兜底话术与状态流转，验证 RAG 对话方案可行性</li>
         <li><b>实时流式优化</b>：集成 VAD 语音活动检测避免无效计算；通过 ASR 流式识别 + TTS 流式合成 + 高频话术缓存等逐步优化交互时延，在测试环境下将端到端对话延迟从初版 3s+ 降至 <span class="highlight">1.2s 以内</span></li>
-
       </ul>
       <div class="project-sub">核心成果</div>
       <ul class="results-list">
@@ -562,14 +723,14 @@
       </div>
       <div class="project-sub">核心工作</div>
       <ul class="project-list">
-        <li><b>架构设计与组件沉淀</b>：设计模块化 SDK 体系，各 SDK 职责独立、按需引入；在此基础上沉淀全局弹窗调度管理器（单例模式 + 优先级队列，支持多弹窗批量注入、按优先级依次释放）、请求层、埋点上报、JSBridge 通信、环境判断等通用能力，统一各项目基础设施，减少重复开发</li>
+        <li><b>架构设计与组件沉淀</b>：设计模块化 SDK 体系，各 SDK 职责独立、按需引入；在此基础上沉淀全局弹窗调度管理器（单例模式 + 优先级队列，支持多弹窗批量注入、按优先级依次释放）、埋点上报、JSBridge 通信、环境判断等通用能力，统一各项目基础设施，减少重复开发</li>
         <li><b>构建与发布</b>：基于 Rollup 搭建多规格构建流程，支持 UMD / ESM / CJS 多种输出格式</li>
-        <li><b>持续维护</b>：建立版本管理与变更日志机制，持续跟进线上问题并优化性能</li>
+        <li><b>持续维护</b>：建立规范化的版本管理、变更日志与发布流程，提升 SDK 迭代的可追踪性与可维护性，并基于线上反馈持续优化稳定性与性能。</li>
       </ul>
       <div class="project-sub">核心成果</div>
       <ul class="results-list">
-        <li>SDK 稳定支撑 <span class="highlight">10+ 线上项目</span>，覆盖公司主要核心业务线</li>
-        <li>新项目接入成本降低约 <span class="highlight">30%</span>，实现"一次接入，多端复用"</li>
+        <li>SDK 稳定支撑多条核心业务线的线上项目接入与运行</li>
+        <li>明显降低新项目接入成本，实现"一次接入，多端复用"</li>
         <li>线上严重异常率保持较低水平，未发生影响核心业务的重大线上事故</li>
       </ul>
       <div class="project-tags">
