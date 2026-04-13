@@ -687,26 +687,28 @@
         <span class="project-period">2025 — 2026</span>
       </div>
       <div class="project-intro">
-        作为前端负责人主导项目方案设计，围绕"自动外呼 → 语音识别 → 对话决策 → 语音合成"搭建实时语音交互闭环；借助 AI 工具完成 Python 服务层、SIP 对接与 RAG 流程原型验证，项目当前处于 PoC / Demo 阶段，尚未正式投入生产环境。
+        作为前端负责人主导项目方案设计，围绕"自动外呼 → 语音识别 → 对话决策 → 语音合成"搭建实时语音交互闭环；借助 AI 工具完成 Python 服务层、SIP 对接与实时对话流程原型验证，项目当前处于验证阶段。
       </div>
       <div class="project-sub">核心工作</div>
       <ul class="project-list">
-        <li><b>整体方案设计</b>：主导技术选型、模块拆分与组件化架构设计，明确 SIP 通信、ASR/TTS、RAG 对话、任务调度等模块职责与接口边界；借助 AI 工具完成 Python 服务层与 pjsua2 的关键流程验证，打通外呼任务派发、通话控制与语音处理主链路</li>
-        <li><b>对话链路验证</b>：用户语音经 ASR 转文字后，由大语言模型进行意图识别与话术库检索，结合检索结果生成回复；针对意图识别不确定场景设计兜底话术与状态流转，验证 RAG 对话方案可行性</li>
-        <li><b>实时流式优化</b>：集成 VAD 语音活动检测避免无效计算；通过 ASR 流式识别 + TTS 流式合成 + 高频话术缓存等逐步优化交互时延，在测试环境下将端到端对话延迟从初版 3s+ 降至 <span class="highlight">1.2s 以内</span></li>
+        <li><b>整体方案设计</b>：主导技术选型、模块拆分与组件化架构设计，明确 SIP 通信、ASR/TTS、LLM 对话、任务调度等模块职责与接口边界；抽象对话流程为不同状态，并通过事件驱动（如 ASR 返回、播放完成）进行流转，统一核心逻辑；借助 AI 工具完成 Python 服务层与 pjsua2 关键流程验证，打通外呼任务派发、通话控制与语音处理主链路</li>
+        <li><b>对话链路验证</b>：用户语音经 ASR 转文字后，由大语言模型进行流式回复生成，并结合意图标记解析（如挂断/转人工）驱动后续动作；针对识别不确定和用户静默场景设计兜底话术与状态流转，验证电话对话链路可行性</li>
+        <li><b>实时流式优化</b>：基于 ASR 分句判停、欢迎语预生成、LLM 流式输出切分、TTS 分段合成播放与高频话术缓存逐步优化交互时延，显著改善首响速度与多轮对话响应体验</li>
+        <li><b>工程化落地验证</b>：工程化与对接形态：提供 FastAPI 与 RabbitMQ 双入口，支持任务消费与结果回传；补齐通话录音、会话记录、资源清理与可观测日志，便于部署联调与后续运维接入。</li>
       </ul>
       <div class="project-sub">核心成果</div>
       <ul class="results-list">
-        <li>以前端背景完成跨领域项目的方案拆解、关键链路验证与 Demo 落地，体现复杂系统规划与推进能力</li>
+        <li>以前端背景完成跨领域项目的方案拆解、关键链路验证，体现复杂系统规划、跨栈协同与 AI 工具驱动交付能力</li>
       </ul>
       <div class="project-tags">
         <span class="tag">FreeSWITCH</span>
         <span class="tag">SIP</span>
         <span class="tag">WebSocket</span>
         <span class="tag">ASR/TTS</span>
-        <span class="tag">RAG</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">RabbitMQ</span>
         <span class="tag">LLM</span>
-        <span class="tag">VAD</span>
+        <span class="tag">pjsua2</span>
         <span class="tag">Python</span>
         <span class="tag">Cursor</span>
       </div>
