@@ -623,6 +623,7 @@
       <div class="skill-row"><span class="skill-label">前端技术</span><span class="skill-value">React、Next.js、TypeScript、JavaScript</span></div>
       <div class="skill-row"><span class="skill-label">工程化构建</span><span class="skill-value">Webpack、Rollup、Vite、CI/CD（Jenkins）、多业务线构建体系</span></div>
       <div class="skill-row"><span class="skill-label">架构设计</span><span class="skill-value">SDK 体系设计、模块化架构、前端基础设施建设</span></div>
+      <div class="skill-row"><span class="skill-label">性能优化</span><span class="skill-value">首屏优化、懒加载与预加载、资源缓存、代码分割、虚拟列表、Web Worker</span></div>
       <div class="skill-row"><span class="skill-label">跨端与客户端</span><span class="skill-value">微信小程序、Hybrid App、鸿蒙应用、JSBridge</span></div>
       <div class="skill-row"><span class="skill-label">数据监控与通信</span><span class="skill-value">神策埋点、火山数据、性能监控、线上问题定位、WebSocket</span></div>
       <div class="skill-row"><span class="skill-label">AI 辅助开发</span><span class="skill-value">Cursor、claude code（用于方案设计、原型验证、代码生成、测试辅助）</span></div>
@@ -670,7 +671,7 @@
         <span class="work-period">2017.05 — 2018.07</span>
       </div>
       <ul class="work-desc">
-        <li>负责混合 APP（Hybrid App）H5 侧业务开发，基于 WebView 容器实现核心业务页面，与原生端通过 JSBridge 完成交互对接</li>
+        <li>负责混合APP H5 侧业务开发，基于 WebView 容器实现核心业务页面，与原生端通过 JSBridge 完成交互对接</li>
         <li>参与 PC 端管理后台开发及运营活动页面搭建，使用 React 完成功能模块的迭代与维护</li>
       </ul>
     </div>
@@ -683,24 +684,20 @@
     <!-- 项目1: AI智能外呼 -->
     <div class="project">
       <div class="project-header">
-        <span class="project-name">AI 智能外呼系统 — 方案设计与原型验证</span>
+        <span class="project-name">AI 智能外呼系统 — 前端跨栈主责 · AI 协同交付</span>
         <span class="project-period">2025 — 2026</span>
       </div>
       <div class="project-intro">
-        主导「自动外呼 → 实时 ASR → 对话决策 → TTS」语音闭环系统设计，构建基于「事件驱动 + 流式 Pipeline + 单通隔离」的实时语音对话架构；通过 AI 协作完成跨语言服务（Python + SIP/PJSIP）原型设计与关键链路验证，推进系统从方案到可运行 Demo 的落地。 </div>
+        面向电销/回访场景的自动化外呼需求，作为前端研发以 AI 协同方式完成「自动外呼 → 实时 ASR → 对话决策 → TTS」全链路系统的架构设计与核心实现，整体采用事件驱动 + 流式 Pipeline + 单通隔离架构。
+ </div>
       <div class="project-sub">核心工作</div>
       <ul class="project-list">
-        <li><b>架构设计</b>：主导模块拆分与技术选型，明确 SIP、ASR、LLM、TTS、意图解析职责边界；基于事件驱动构建对话主链路，并引入 Generation ID 做轮次隔离，统一处理打断（Barge-in）、过期音频淘汰与延迟动作执行；通过隐式状态控制（事件 + 条件判断）驱动轮次切换与异常恢复，解决流式并发下的串话、错播与状态错乱问题。</li>
-        <li><b>链路打通与流式优化</b>：打通 WebSocket 实时 ASR → LLM 流式生成 → TTS 分段播放闭环，实现“边生成边播放”；基于 ASR 终态断句 + 静音超时完成轮次判停与推进，并通过欢迎语预生成与流式切片播放降低首响应时延</li>
-        <li><b>工程化与稳定性</b>：基于 FastAPI + RabbitMQ 构建任务投递与并发消费模型，支持多任务调度；落地日志、录音、会话记录与资源回收机制，补齐异常兜底（静音/识别失败/连接断开），并通过 Prompt 缓存（远端优先/本地降级）提升系统可用性</li>
-      </ul>
-      <div class="project-sub">核心成果</div>
-      <ul class="results-list">
-        <li>以前端背景完成跨领域系统的方案拆解、关键异步链路设计与Demo落地验证</li>
-        <li>沉淀「事件驱动 + 流式异步 + Generation ID 并发控制」设计经验，形成基于 AI 协作的复杂系统落地方法</li>
+        <li><b>架构设计</b>：主导 SIP / ASR / LLM / TTS / 意图解析的模块拆分与职责边界；引入 **Generation ID 轮次标识**统一处理打断（Barge-in）、过期音频淘汰与延迟动作；以事件 + 条件判断的隐式状态控制替代显式状态机，解决流式并发下的串话、错播与状态错乱</li>
+        <li><b>链路打通与流式优化</b>：打通 ASR 流式识别 → LLM 流式输出 → TTS 分段播放闭环，实现"边生成边播放"；ASR 终态断句 + 静音超时完成轮次判停；欢迎语预生成 + 流式切片降低首响应时延</li>
+        <li><b>工程化与稳定性</b>：FastAPI + RabbitMQ 支撑任务投递与并发消费；落地会话录音、日志与资源回收；补齐静音 / ASR 失败 / SIP 断连异常兜底；Prompt 远端缓存 + 本地降级提升弱网可用性</li>
+        <li><b>AI 协同</b>：主导需求拆解、模块划分、接口契约、关键时序与选型决策；Python/pjsua2 具体编码由 AI 承担，在零 Python 背景下完成从 0 到 1 的系统交付与内部试运行</li>
       </ul>
       <div class="project-tags">
-        <span class="tag">FreeSWITCH</span>
         <span class="tag">SIP</span>
         <span class="tag">WebSocket</span>
         <span class="tag">ASR/TTS</span>
@@ -720,23 +717,16 @@
         <span class="project-period">2022 — 至今</span>
       </div>
       <div class="project-intro">
-        主导公司前端 SDK 体系从 0 到 1 建设，覆盖大数据采集 SDK、客户端交互 SDK 等核心能力，支撑多条业务线快速接入。
+        主导前端 SDK 体系规划与建设，以模块化、可插拔架构从 0 到 1 实现大数据采集、客户端交互、错误监控等核心 SDK，支撑多条业务线快速接入与长期演进。
       </div>
       <div class="project-sub">核心工作</div>
       <ul class="project-list">
-        <li><b>架构设计与组件沉淀</b>：设计模块化 SDK 体系，各 SDK 职责独立、按需引入；在此基础上沉淀全局弹窗调度管理器（单例模式 + 优先级队列，支持多弹窗批量注入、按优先级依次释放）、埋点上报、JSBridge 通信、环境判断等通用能力，统一各项目基础设施，减少重复开发</li>
-        <li><b>构建与发布</b>：基于 Rollup 搭建多规格构建流程，支持 UMD / ESM / CJS 多种输出格式</li>
-        <li><b>持续维护</b>：建立规范化的版本管理、变更日志与发布流程，提升 SDK 迭代的可追踪性与可维护性，并基于线上反馈持续优化稳定性与性能。</li>
-      </ul>
-      <div class="project-sub">核心成果</div>
-      <ul class="results-list">
-        <li>SDK 稳定支撑多条核心业务线的线上项目接入与运行</li>
-        <li>明显降低新项目接入成本，实现"一次接入，多端复用"</li>
-        <li>线上严重异常率保持较低水平，未发生影响核心业务的重大线上事故</li>
+        <li><b>体系架构</b>：搭建模块化 SDK 体系，从 0 到 1 实现大数据采集（埋点上报）、客户端交互（JSBridge 通信）、错误监控等核心 SDK；各 SDK 职责内聚、独立发布、按需引入，隔离业务线交叉依赖，支撑多项目并行接入与独立演进</li>
+        <li><b>构建与发布</b>：基于 Rollup 搭建多规格构建流程，输出 UMD / ESM / CJS 三种产物并生成 TypeScript 类型声明；结合 Tree Shaking 与按需导出控制产物体积，保障轻量接入</li>
+        <li><b>工程化治理</b>：建立 SemVer 版本规范、Changelog 变更日志与规范化发布流程，保障版本可追踪、可回滚；结合线上监控与业务反馈持续打磨稳定性</li>
       </ul>
       <div class="project-tags">
         <span class="tag">TypeScript</span>
-        <span class="tag">Webpack</span>
         <span class="tag">Rollup</span>
         <span class="tag">SDK 架构</span>
         <span class="tag">模块化设计</span>
@@ -755,16 +745,15 @@
       <div class="project-sub">核心工作</div>
       <ul class="project-list">
         <li><b>多业务线构建体系</b>：基于 Webpack 深度定制构建配置，通过模块化设计支持多主题 / 多业务线动态构建，一套代码产出多条业务线产物，明显缩短新业务接入周期</li>
+        <li><b>业务通用组件沉淀</b>：实现全局弹窗调度管理器（单例模式 + 优先级队列，支持多弹窗批量注入、按优先级依次释放），解决多业务弹窗并发下的抢占、遮挡与时序混乱问题</li>
+        <li><b>配置化表单渲染引擎</b>：基于工厂模式实现 Schema-Driven 渲染器，以 JSON 数组驱动 10+ 种表单控件动态渲染，统一收敛显隐、校验、联动与多语言；新业务线接入仅改配置，页面零改动</li>
         <li><b>首屏性能优化</b>：通过资源整合、懒加载、预加载等策略，在内部测试中将首屏加载时间从 2.5s 优化至 <span class="highlight">1.2s 以内</span>；利用 Webpack 插件实现 Loading 动画提前展示，明显减少白屏等待时间</li>
-        <li><b>长列表性能优化</b>：针对后台管理模块中万级数据列表的渲染卡顿问题，引入 react-window 实现虚拟滚动，仅渲染可视区域及缓冲区 DOM 节点，显著降低列表渲染开销，滚动流畅度明显提升</li>
-        <li><b>CI/CD 与监控</b>：协助运维团队搭建基于 Jenkins 的前端自动化部署流水线，配置多环境构建参数及部署策略；接入神策 / 火山数据平台，建立线上监控预警机制，明显提升部署效率并减少重复操作</li>
+        <li><b>CI/CD 与监控</b>：协助运维团队搭建基于 Jenkins 的前端自动化部署流水线，配置多环境构建参数及部署策略；落地 CDN 缓存策略，兼顾加载性能与上线可靠性；接入神策 / 火山数据平台，建立线上监控预警机制</li>
       </ul>
       <div class="project-tags">
         <span class="tag">React</span>
         <span class="tag">Webpack</span>
         <span class="tag">性能优化</span>
-        <span class="tag">react-window</span>
-        <span class="tag">虚拟列表</span>
         <span class="tag">Jenkins</span>
         <span class="tag">CI/CD</span>
         <span class="tag">神策数据</span>
@@ -775,24 +764,21 @@
     <!-- 项目4: 官网SSR -->
     <div class="project">
       <div class="project-header">
-        <span class="project-name">公司官网混合渲染架构建设</span>
+        <span class="project-name">公司官网 Next.js 搭建与 SEO 基建</span>
         <span class="project-period">2023 — 2024</span>
       </div>
       <div class="project-intro">
-        基于 Next.js App Router 搭建公司官网（品牌展示、博客资讯等模块），采用 React Server Components、Streaming SSR 与 SSG / ISR 组合方案，实现服务端优先渲染与渐进式加载，提升 SEO 收录能力与首屏用户体验。
+        基于 Next.js App Router 搭建公司官网（品牌展示、博客资讯等模块），以 SSG / ISR 为主、SSR 为辅完成内容型页面渲染，并建立统一的 Metadata 与站点地图生成机制。
       </div>
       <div class="project-sub">核心工作</div>
       <ul class="project-list">
-        <li><b>渲染架构设计</b>：以 Server Components 作为默认渲染层，静态页面通过 generateStaticParams + ISR 实现增量静态生成，减少客户端 JS 下发并提升页面加载性能。</li>
-        <li><b>流式渲染优化（Streaming SSR）</b>：基于 Suspense + loading.tsx 实现流式渲染，优先返回页面 Shell，数据区块按需分块注入，配合 Skeleton 占位优化感知体验，有效降低白屏时间并提升首屏可见速度。</li>
-        <li><b>SEO 与元信息管理</b>：使用 generateMetadata 统一管理 Meta 信息，结合结构化数据（JSON-LD）与 Sitemap 自动生成，提升搜索引擎抓取效率与页面收录能力。</li>
-        <li><b>性能优化</b>：利用 Next.js Image 实现图片懒加载与自适应尺寸优化，结合 dynamic import 实现组件级按需加载，核心页面 LCP 在良好网络环境下稳定在 ~1.5s–2s 区间（基于 Lighthouse 测试）。</li>
+        <li><b>渲染策略落地</b>：内容页采用 SSG + ISR（按内容更新节奏配置 revalidate），动态页走 SSR；合理划分 Server / Client Components 边界，将交互逻辑收敛到客户端组件，控制客户端 JS 下发体积</li>
+        <li><b>SEO 基建</b>：基于 generateMetadata 统一管理各页面 Meta 信息，集成结构化数据（JSON-LD）与 Sitemap / robots 自动生成，补齐官网 SEO 侧基础能力</li>
+        <li><b>资源与加载优化</b>：使用 Next.js Image 做图片懒加载与自适应尺寸；非首屏模块通过 dynamic import 按需加载，并结合 Suspense + loading.tsx 优化加载过程中的感知体验</li>
       </ul>
       <div class="project-tags">
         <span class="tag">Next.js</span>
         <span class="tag">App Router</span>
-        <span class="tag">RSC</span>
-        <span class="tag">Streaming SSR</span>
         <span class="tag">SSG</span>
         <span class="tag">ISR</span>
         <span class="tag">SEO</span>
