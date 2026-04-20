@@ -626,7 +626,7 @@
       <div class="skill-row"><span class="skill-label">性能优化</span><span class="skill-value">首屏优化、懒加载与预加载、资源缓存、代码分割、虚拟列表、Web Worker</span></div>
       <div class="skill-row"><span class="skill-label">跨端与客户端</span><span class="skill-value">微信小程序、Hybrid App、鸿蒙应用、JSBridge</span></div>
       <div class="skill-row"><span class="skill-label">数据监控与通信</span><span class="skill-value">神策埋点、火山数据、性能监控、线上问题定位、WebSocket</span></div>
-      <div class="skill-row"><span class="skill-label">AI 辅助开发</span><span class="skill-value">Cursor、claude code（用于方案设计、原型验证、代码生成、测试辅助）</span></div>
+      <div class="skill-row"><span class="skill-label">AI 辅助开发</span><span class="skill-value">Cursor、Claude Code（用于方案设计、原型验证、代码生成、测试辅助）</span></div>
     </div>
   </div>
 
@@ -688,11 +688,11 @@
         <span class="project-period">2025 — 2026</span>
       </div>
       <div class="project-intro">
-        面向电销/回访场景的自动化外呼需求，作为前端研发以 AI 协同方式完成「自动外呼 → 实时 ASR → 对话决策 → TTS」全链路系统的架构设计与核心实现，整体采用事件驱动 + 流式 Pipeline + 单通隔离架构。
- </div>
+        面向电销/回访场景的自动化外呼需求，作为前端研发以 AI 协同方式完成"自动外呼 → 实时 ASR → 对话决策 → TTS"全链路系统的架构设计与核心实现，整体采用事件驱动 + 流式 Pipeline + 单通隔离架构。
+      </div>
       <div class="project-sub">核心工作</div>
       <ul class="project-list">
-        <li><b>架构设计</b>：主导 SIP / ASR / LLM / TTS / 意图解析的模块拆分与职责边界；引入 **Generation ID 轮次标识**统一处理打断（Barge-in）、过期音频淘汰与延迟动作；以事件 + 条件判断的隐式状态控制替代显式状态机，解决流式并发下的串话、错播与状态错乱</li>
+        <li><b>架构设计</b>：主导 SIP / ASR / LLM / TTS / 意图解析的模块拆分与职责边界；引入 <b>Generation ID 轮次标识</b> 统一处理打断（Barge-in）、过期音频淘汰与延迟动作；以事件 + 条件判断的隐式状态控制替代显式状态机，解决流式并发下的串话、错播与状态错乱</li>
         <li><b>链路打通与流式优化</b>：打通 ASR 流式识别 → LLM 流式输出 → TTS 分段播放闭环，实现"边生成边播放"；ASR 终态断句 + 静音超时完成轮次判停；欢迎语预生成 + 流式切片降低首响应时延</li>
         <li><b>工程化与稳定性</b>：FastAPI + RabbitMQ 支撑任务投递与并发消费；落地会话录音、日志与资源回收；补齐静音 / ASR 失败 / SIP 断连异常兜底；Prompt 远端缓存 + 本地降级提升弱网可用性</li>
         <li><b>AI 协同</b>：主导需求拆解、模块划分、接口契约、关键时序与选型决策；Python/pjsua2 具体编码由 AI 承担，在零 Python 背景下完成从 0 到 1 的系统交付与内部试运行</li>
