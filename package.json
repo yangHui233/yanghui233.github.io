@@ -1,0 +1,17 @@
+{
+  "name": "yanghui-resume",
+  "version": "1.0.0",
+  "private": true,
+  "description": "把 index.html 简历转成 PDF / Word",
+  "scripts": {
+    "pdf": "node generate-pdf.js",
+    "pdf:sh": "bash generate-pdf.sh",
+    "docx": "bash generate-docx.sh",
+    "doc": "bash generate-word-doc.sh",
+    "build": "bash generate-pdf.sh && bash generate-docx.sh",
+    "build:best": "bash generate-pdf.sh && bash generate-word-doc.sh"
+  },
+  "devDependencies": {
+    "puppeteer": "^24.42.0"
+  }
+}
