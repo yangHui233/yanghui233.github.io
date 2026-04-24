@@ -771,11 +771,11 @@
         <span class="project-period">2023 — 2024</span>
       </div>
       <div class="project-intro">
-        基于 Next.js App Router 搭建公司官网（品牌展示、博客资讯等模块），以 SSG / ISR 为主、SSR 为辅完成内容型页面渲染，并建立统一的 Metadata 与站点地图生成机制。
+        基于 Next.js App Router 搭建贷款与资讯服务官网（贷款产品、平台检索、博客资讯、用户服务等模块），以 SSG / ISR 为主、SSR 为辅完成内容型页面渲染，并建立统一的 Metadata 与站点地图生成机制。
       </div>
       <div class="project-sub">核心工作</div>
       <ul class="project-list">
-        <li><b>渲染策略落地</b>：内容页采用 SSG + ISR（按内容更新节奏配置 revalidate），动态页走 SSR；合理划分 Server / Client Components 边界，将交互逻辑收敛到客户端组件，控制客户端 JS 下发体积</li>
+        <li><b>渲染策略落地</b>：内容页采用 SSG + ISR（按内容更新节奏配置 revalidate），动态详情与检索场景走 SSR；合理划分 Server / Client Components 边界，将交互逻辑收敛到客户端组件，控制客户端 JS 下发体积</li>
         <li><b>SEO 基建</b>：基于 generateMetadata 统一管理各页面 Meta 信息，集成结构化数据（JSON-LD）与 Sitemap / robots 自动生成，补齐官网 SEO 侧基础能力</li>
         <li><b>资源与加载优化</b>：使用 Next.js Image 做图片懒加载与自适应尺寸；非首屏模块通过 dynamic import 按需加载，并结合 Suspense + loading.tsx 优化加载过程中的感知体验</li>
       </ul>
